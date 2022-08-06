@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 const styles = {
   root: {
     display: "flex",
@@ -13,28 +15,35 @@ const styles = {
 };
 
 export default function Home() {
-  // 3. Criamos a função que irá lidar com o envio do nosso formulário
+  // 1. Criamos a configuração de estado
+  const [message, setMessage] = useState();
+
   function onSubmit(e) {
     e.preventDefault();
 
-    console.log("Enviou os dados da mensagem");
+    // 4. Ao submeter o formulário é possível obter o texto digitado
+    console.log("Enviou os dados da mensagem", message);
+  }
+
+  function onChange(e) {
+    // 3. Armazenamos o valor no nosso estado
+    setMessage(e.target.value);
   }
 
   return (
     <div style={styles.root}>
-      {/* 2. Criamos a estrutura do noss HTML + os estilos */}
       <div style={styles.container}>
         <h1>Chat</h1>
 
         <div></div>
 
         <form onSubmit={onSubmit}>
-          <input type="text" name="mensagem" />
+          {/* 2. Criamos a função do evento onChange */}
+          <input type="text" name="mensagem" onChange={onChange} />
           <input type="submit" value="Enviar mensagem" />
         </form>
       </div>
 
-      {/* 1. Criamos os estilos globais para centralizar o conteúdo na página */}
       <style global jsx>{`
         html,
         body,
