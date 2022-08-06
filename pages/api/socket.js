@@ -4,7 +4,7 @@ import { Server } from "socket.io";
 export default function SocketIOHandler(req, res) {
   // 2. Verificamos se o socket.io já está iniciado
   if (res.socket.server.io) {
-    console.log("[Servidor] Websockets já está iniciado.");
+    console.log("[Servidor] WebSocket já está iniciado.");
     res.end();
     return;
   }
@@ -28,6 +28,6 @@ export default function SocketIOHandler(req, res) {
   });
 
   // 5. Finalizamos a configuração do servidor Websocket
-  console.log("[Servidor] Websockets configurados");
+  console.log("[Servidor] WebSocket configurado");
   res.end();
 }
