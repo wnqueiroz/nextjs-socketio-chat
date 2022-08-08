@@ -1,34 +1,31 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# nextjs-socketio-chat
 
-## Getting Started
+> Aplicação de chat em tempo real utilizando Socket.io e NextJS! 🚀
 
-First, run the development server:
+## Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+Em um determinado dia, você recebe uma demanda de um cliente que precisa visualizar dados em tempo real em um dashboard. Com o grande volume de dados que você precisará exibir na aplicação e também garantir a frequência em que esses dados sejam atualizados, logo você se dá conta de que realizar várias requisições pra sua API não parece ser uma boa estratégia... E agora?
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Na verdade o que temos de "real-time" é fake! O que fazemos é passar uma "sensação" de tempo real, trafegando os dados da maneira mais rápida e performática possível.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Existem algumas tecnologias e maneiras de atingirmos isso, e uma delas é com o uso de WebSocket.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## O que é WebSocket?
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- É um protocolo de comunicação bidirecional baseado em TCP;
+- A relação com o protocolo HTTP é somente ao realizarmos o handshake com o Cliente e o Servidor;
+- Seu uso é ideal para aplicações que precisem trafegar determinados dados em tempo real e com baixa latência: chats, jogos e etc;
+- Baseado na numa arquitetura de eventos.
 
-## Learn More
+HTTP e WebSocket ambos são protocolos usados ​​na comunicação cliente-servidor.
+A melhor maneira de entender como o WebSocket funciona, é comparando ele com o protocolo HTTP.
 
-To learn more about Next.js, take a look at the following resources:
+## HTTP vs WebSocket
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+![HTTP vs WebSocket](./docs/http-socket.png)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+O protocolo HTTP funciona com uma **Comunicação Unidirecional**, toda vez que o Cliente precisa de uma informação do Servidor (onde ficam armazenados os dados dos usuários por exemplo), uma requisição é enviada do Cliente para o Servidor, e o Servidor devolve os dados com uma resposta à aquela requisição. Uma vez que isso ocorre, a nossa conexão é encerrada, ou seja, caso precisemos de uma outra informação esse mesmo fluxo se repete.
 
-## Deploy on Vercel
+Já com o WebSocket, a conexão criada entre Cliente e Servidor é de maneira contínua (através de um túnel de **Comunicação Bidirecional**), sem precisarmos abrir novas conexões toda vez que necessitarmos de uma nova informação. Por conta disso, a velocidade de tráfego também acaba sendo maior que o protocolo HTTP.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Ele é baseado numa arquitetura de eventos onde o Cliente e o Servidor emitem e recebem eventos um pro outro, se comunicando livremente.
